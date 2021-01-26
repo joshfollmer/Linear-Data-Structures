@@ -15,6 +15,12 @@ class LinkedList:
        #this is for the data that will be stored in the head
        self.head = None 
 
+    def append_right(self, item):
+        new_node = Node(item)
+        
+        
+
+
 #this  is justan example of how this works. this will create a list of 1, 2, 3
 #first initialize the list
 l = LinkedList()
