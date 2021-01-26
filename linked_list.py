@@ -1,6 +1,9 @@
 #Josh Follmer
 #linked lsit assignment
 
+#most of this is based (but not directly copied) off of https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/
+
+
 #this is a class for the things that are getting stored in the list
 class Node:
     def __init__(self, data):
@@ -18,7 +21,7 @@ class LinkedList:
        self.head = None 
 
     def append_left(self, item):
-        '''puts a new item at the start of the list, making it the new head'''
+        '''Puts a new item at the start of the list, making it the new head'''
         #makes a new node
         new_node = Node(item)
         #the new node is set to the head
@@ -27,6 +30,7 @@ class LinkedList:
         self.head = new_node
         
     def append_right(self, item):
+        '''Adds an item to the end'''
         new_node = Node(item)
         #starts at the head
         last = self.head
@@ -38,27 +42,42 @@ class LinkedList:
         
 
     def pop_left(self):
+        '''Deletes the head, the second in the list becomes the new head'''
         #saves the current head as a temp variable
         old_head = self.head
         #the second node now becomes the head
-        old_head.next.data = self.head
+        self.head = old_head.next
         #deletes the old head
         old_head = None
 
+
     #this is based from https://www.geeksforgeeks.org/remove-last-node-of-the-linked-list/#:~:text=Approach%3A%20To%20delete%20the%20last,pointer%20of%20that%20node%20null.&text=Create%20an%20extra%20space%20secondLast,till%20the%20second%20last%20node.&text=delete%20the%20last%20node%2C%20i.e.,second%20last%20node%20delete(secondLast.
     def pop_right(self):
-        second_last = self.head
+        #this one is pretty redunant but i should be in the habit of making these
+        '''deletes the last element in the list '''
+        #makes a variable that will end up as the second last in the list
+        last = self.head
+        #while a node has two nodes in front of it, loops though the list
         while(second_last.next.next):
             second_last = second_last.next
+        #removes the connection from the second last to the last
         second_last.next = None
+        
            
     def print_list(self):
+        '''Prints the list'''
+        #sets a temp variable
         temp = self.head
+        #while the current node exists
         while(temp):
+            #prints the data
             print(temp.data)
+            #changes to the next node
             temp = temp.next
         
     def get_len(self):
+        '''Returns the lenth of the list'''
+        #same thing as print_list, but adds one to the length each loop and returns the result
         temp = self.head
         length = 0
         while(temp):
@@ -66,18 +85,15 @@ class LinkedList:
             temp = temp.next
         return length
 
+    def contains(self, key):
+        '''Checks if the list contains the passed item'''
+        temp = self.head
+        while(temp):
+            if temp.data == key:
+                return True
+            else: 
+                temp = temp.next
+        return False
+
  
 
-#this  is justan example of how this works. this will create a list of 1, 2, 3
-#first initialize the list
-l = LinkedList()
-#the head is getting assigned with 1
-l.head = Node(1)
-
-
-l.append_right(2)
-l.append_right(3)
-
-l.pop_left()
-
-l.print_list()
