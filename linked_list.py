@@ -56,7 +56,7 @@ class LinkedList:
         #this one is pretty redunant but i should be in the habit of making these
         '''deletes the last element in the list '''
         #makes a variable that will end up as the second last in the list
-        last = self.head
+        second_last = self.head
         #while a node has two nodes in front of it, loops though the list
         while(second_last.next.next):
             second_last = second_last.next
