@@ -26,6 +26,9 @@ class Doubly_linked_list:
     def append_right(self, item):
         '''Inserts item at the end of the list'''
         new_node = Node(item)
+        if self.head is None:
+            self.head = new_node
+            return
         #traverses the list, until last is set to the last item in the list, which will be set to the new node
         last = self.head
         while(last.next):

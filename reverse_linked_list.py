@@ -1,8 +1,3 @@
-#Josh Follmer
-#linked lsit assignment
-
-#most of this is based (but not directly copied) off of https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/
-
 
 #this is a class for the things that are getting stored in the list
 class Node:
@@ -32,12 +27,11 @@ class LinkedList:
     def append_right(self, item):
         '''Adds an item to the end'''
         new_node = Node(item)
-
+        #starts at the head
+        last = self.head
         if self.head is None:
             self.head = new_node
             return
-        #starts at the head
-        last = self.head
         #traverses the list. each time a next node exists, move on to the next and set the variable to it
         while(last.next):
             last=last.next
@@ -98,4 +92,26 @@ class LinkedList:
             temp = temp.next
         return False
 
+    def reverse(self):
+        '''Reverses the order of the list'''
+        #this works by reversing the pointers, so each node points to the item before it
+        prev = None
+        #function starts at the head
+        current = self.head
+        #while the selected node is not null
+        while(current):
+            #selects the next node 
+            next = current.next
+            #changes the pointer from the next node to the previous node
+            current.next = prev
+            #the next two lines select the next node for the next loop
+            prev = current
+            current = next
+        #makes the formerly last item the new head
+        self.head = prev
+            
+l = LinkedList()
+
+l.reverse()
+#l.print_list()      
  
