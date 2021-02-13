@@ -28,6 +28,10 @@ class Doubly_linked_list:
         new_node = Node(item)
         #traverses the list, until last is set to the last item in the list, which will be set to the new node
         last = self.head
+        #this is so it doesnt throw an error on the first append
+        if self.head is None:
+            self.head = new_node
+            return
         while(last.next):
             last = last.next
         #the last item is now the new node
