@@ -34,6 +34,10 @@ class LinkedList:
         new_node = Node(item)
         #starts at the head
         last = self.head
+        #this is so it doesnt throw an error for the first append
+        if self.head is None:
+            self.head = new_node
+            return
         #traverses the list. each time a next node exists, move on to the next and set the variable to it
         while(last.next):
             last=last.next
