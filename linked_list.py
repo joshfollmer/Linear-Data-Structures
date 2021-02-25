@@ -34,6 +34,9 @@ class LinkedList:
         new_node = Node(item)
         #starts at the head
         last = self.head
+        if self.head is None:
+            self.head = new_node
+            return
         #traverses the list. each time a next node exists, move on to the next and set the variable to it
         while(last.next):
             last=last.next
@@ -95,5 +98,52 @@ class LinkedList:
                 temp = temp.next
         return False
 
- 
+    def has_cycle(self):
+        #if the list has only one node, it cannot be a cycle
+        if self.get_len() <= 1:
+            return False
+        #tortoise starts at the head of the list
+        tortoise = self.head
+        #hare starts at the second node
+        hare = self.head.next
+        
+        while True:
+            try:
+                #each loops, tortoise advances to each node
+                tortoise = tortoise.next
+                #each loop, hare advances two nodes ahead
+                hare = hare.next.next
+            except:
+                #if an exception occurs, which would happen if hare reaches a null value, it is not a cycle so return false
+                return False
+
+            if tortoise == hare:
+                #if the tortoise and hare are at the same node, which could only happen if hare looped and caught up to tortoise, it is a cycle so return true
+                if self.is_circle() == True:
+                    print('Is a circle')
+                return True
+
+    def is_circle(self):
+        #the pointer starts at the second node
+        pointer = self.head
+        try:
+            #loops through as many times as the list is long 
+            for i in range(self.get_len()):
+                #each loops moves the pointe rover one node
+                pointer = pointer.next
+        except:
+            #if it ends as a null, it is not a cycle so return false
+            print("Is not a cycle")
+            return False
+        #if the pointer ends at the head, return true
+        if pointer == self.head:
+            return True
+        #else return false
+        else:
+            return False
+
+
+
+
+
 
