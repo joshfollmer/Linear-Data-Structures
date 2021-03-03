@@ -24,8 +24,17 @@ class CircularLinkedList:
         '''Puts a new item at the start of the list, making it the new head'''
         #makes a new node
         new_node = Node(item)
-        #the new node is set to the head
+        temp = self.head
+        #the node after the new node is the head
         new_node.next = self.head
+
+        if self.head is not None:
+            while(temp.next != self.head):
+                temp = temp.next
+            temp.next = new_node
+        else:
+            new_node.next = new_node
+
         #the head is now this new node
         self.head = new_node
         
@@ -43,7 +52,8 @@ class CircularLinkedList:
             last=last.next
         #once it reaches the last node, set the next node to the new one
         last.next = new_node
-        #new_node.next = self.head
+        new_node.next = self.head
+       
         
 
     def pop_left(self):
@@ -63,10 +73,11 @@ class CircularLinkedList:
         #makes a variable that will end up as the second last in the list
         second_last = self.head
         #while a node has two nodes in front of it, loops though the list
-        while(second_last.next.next):
+        while(second_last.next.next != self.head):
             second_last = second_last.next
         #removes the connection from the second last to the last
         second_last.next = None
+        second_last.next = self.head
         
            
     def print_list(self):
@@ -74,7 +85,7 @@ class CircularLinkedList:
         #sets a temp variable
         temp = self.head
         #while the current node exists
-        while(temp):
+        while(temp.next != self.head):
             #prints the data
             print(temp.data)
             #changes to the next node
@@ -85,7 +96,7 @@ class CircularLinkedList:
         #same thing as print_list, but adds one to the length each loop and returns the result
         temp = self.head
         length = 0
-        while(temp):
+        while(temp.next != self.head):
             length += 1
             temp = temp.next
         return length
@@ -93,7 +104,7 @@ class CircularLinkedList:
     def contains(self, key):
         '''Checks if the list contains the passed item'''
         temp = self.head
-        while(temp):
+        while(temp.next != self.head):
             if temp.data == key:
                 return True
             else: 
@@ -144,11 +155,12 @@ class CircularLinkedList:
         else:
             return False
 
+print('running')
 lst = CircularLinkedList()
 lst.append_right(1)
 lst.append_right(2)
 lst.append_right(3)
 lst.print_list()
-
+print('done')
 
 
