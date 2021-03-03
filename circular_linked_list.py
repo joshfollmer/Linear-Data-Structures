@@ -16,44 +16,52 @@ class Node:
 
 #this is a class for the head node, or the one that will start the list
 class CircularLinkedList:
-    def __init__(self):
+    def __init__(self, node = None):
        #this is for the data that will be stored in the head
-       self.head = None 
+       self.head = node 
+       if node:
+           node.next = self.head
+
+    def is_empty(self):
+        return self.head == None
+
 
     def append_left(self, item):
         '''Puts a new item at the start of the list, making it the new head'''
         #makes a new node
         new_node = Node(item)
-        temp = self.head
-        #the node after the new node is the head
-        new_node.next = self.head
 
-        if self.head is not None:
-            while(temp.next != self.head):
-                temp = temp.next
-            temp.next = new_node
-        else:
+        if self.is_empty():
+            self.head = new_node
             new_node.next = new_node
+        else:
+            temp = self.head
+            while temp.next != self.head:
+                temp = temp.next
+            new_node.next = self.head
+            self.head = new_node
+            temp.next = self.head
 
-        #the head is now this new node
-        self.head = new_node
-        
+
     def append_right(self, item):
         '''Adds an item to the end'''
         new_node = Node(item)
-        #starts at the head
-        last = self.head
-        #this is so it doesnt throw an error for the first append
-        if self.head is None:
-            self.head = new_node
-            return
-        #traverses the list. each time a next node exists, move on to the next and set the variable to it
-        while(last.next):
-            last=last.next
-        #once it reaches the last node, set the next node to the new one
-        last.next = new_node
-        new_node.next = self.head
+        #new_node.next = self.head.next
        
+        
+        #this is so it doesnt throw an error for the first append
+        if self.is_empty():
+            self.head = new_node
+            new_node.next = self.head
+        else:
+        #starts at the head
+            last = self.head
+            #traverses the list. each time a next node exists, move on to the next and set the variable to it
+            while(last.next != self.head):
+                last=last.next
+            last.next = new_node
+            new_node.next = self.head
+        
         
 
     def pop_left(self):
@@ -82,14 +90,18 @@ class CircularLinkedList:
            
     def print_list(self):
         '''Prints the list'''
+        if self.is_empty():
+            return
+        else:
         #sets a temp variable
-        temp = self.head
-        #while the current node exists
-        while(temp.next != self.head):
-            #prints the data
+            temp = self.head
+            #while the current node exists
+            while temp.next != self.head:
+                #prints the data
+                print(temp.data)
+                #changes to the next node
+                temp = temp.next
             print(temp.data)
-            #changes to the next node
-            temp = temp.next
         
     def get_len(self):
         '''Returns the lenth of the list'''
@@ -142,7 +154,7 @@ class CircularLinkedList:
         try:
             #loops through as many times as the list is long 
             for i in range(self.get_len()):
-                #each loops moves the pointe rover one node
+                #each loops moves the pointer over one node
                 pointer = pointer.next
         except:
             #if it ends as a null, it is not a cycle so return false
@@ -155,12 +167,7 @@ class CircularLinkedList:
         else:
             return False
 
-print('running')
-lst = CircularLinkedList()
-lst.append_right(1)
-lst.append_right(2)
-lst.append_right(3)
-lst.print_list()
-print('done')
+
+
 
 
