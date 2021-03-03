@@ -15,7 +15,7 @@ class Node:
     
 
 #this is a class for the head node, or the one that will start the list
-class LinkedList:
+class CircularLinkedList:
     def __init__(self):
        #this is for the data that will be stored in the head
        self.head = None 
@@ -43,6 +43,7 @@ class LinkedList:
             last=last.next
         #once it reaches the last node, set the next node to the new one
         last.next = new_node
+        #new_node.next = self.head
         
 
     def pop_left(self):
@@ -143,8 +144,11 @@ class LinkedList:
         else:
             return False
 
-
-
+lst = CircularLinkedList()
+lst.append_right(1)
+lst.append_right(2)
+lst.append_right(3)
+lst.print_list()
 
 
 
