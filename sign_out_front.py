@@ -28,7 +28,9 @@ class Student:
         total_slides = list(itertools.chain.from_iterable(total_slides))
         
         total_slides = set(total_slides)
-        print(len(total_slides))
+        dec = len(total_slides) / 20
+        percent = '{:.0%}'.format(dec)
+        print(percent)
         
 
 
