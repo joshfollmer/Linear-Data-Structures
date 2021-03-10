@@ -1,8 +1,7 @@
 import circular_linked_list
 from random import randint
 from random import choice
-import itertools
-from datetime import datetime, time
+from datetime import datetime
 from datetime import timedelta
 from math import ceil
 
@@ -17,36 +16,44 @@ class Sign:
 
 class Student:
     def __init__(self):
+        #makes a list of arrival times. it is in the format of year, month, day, hour, minute. the date must be included so the time can be added to or subtracted from (which is think is dumb)
         arrive_times = [datetime(2021, 1, 1,8), datetime(2021, 1, 1,9,40), datetime(2021, 1, 1,11,10), datetime(2021, 1, 1,12,50), datetime(2021, 1, 1,14,30), datetime(2021, 1, 1,16,50), datetime(2021, 1, 1,17, 50), datetime(2021, 1, 1,19)]
         names = ["Lucas", "Will", "Noah", "Alex", "Josh", "Doug", "Mike", "John", "David", "Aaron", "Joye", "Abby", "Sofia", "Fiona", "Zoey", "Lily", "Hannah", "Bella", "Anna", "Elena"]
+        #in my experience i had the same schedule in pairs for monday and wednesday and tuesday and thursday, so i did that here
         self.mw = choice(arrive_times)
         self.tt = choice(arrive_times)
+        #this is their punctuality, or the % chance of them being late on any given day
         self.punc = randint(1, 10)
         self.seen_slides = []
         self.name = choice(names)
+        self.temp = sign.slides.head
  
     def simulate(self, day):
-        self.temp = sign.slides.head
+        #picks a random slide to start the day at
         for i in range(randint(1, 21)):
-            self.temp = self.temp.next
-        
-        
-
+            self.temp = self.temp.next  
+        #day 1 is monday, day 2 is tuesday, etc
         if day == 1 or day == 3:
             arrive = self.mw 
         if day == 2 or day == 4:
             arrive = self.tt
-
-        tardy = randint(1,2)
-        if tardy == 1:
-            arrive -= timedelta(minutes=self.punc)
+        
+        #picks a nnmber between one and ten. if that number is less than their puncuality, they are early. this is my way of making a variable a percentage
+        odds = [1, 2, 3, 4, 5, 6, 7, 8 ,9, 10]
+        tardy = choice(odds)
+        if tardy <= self.punc:
+            # if they are early, subtract some time amount of minutes between one and ten from their arrival time
+            arrive -= timedelta(minutes=randint(1, 10))
+            #if theyre early, theyll be more likely to drive slowly, and see more slides
             self.speed = randint(20, 30)
-        if tardy == 2:
-            arrive += timedelta(minutes=self.punc)
-            self.speed = randint(30, 40)     
-
+        else:
+            #opposite is true for if they are late
+            arrive += timedelta(minutes=randint(1,10))
+            self.speed = randint(30, 40)  
+        #starts the day at 7:50
         t = datetime(2021, 1, 1, 7,50)
-
+        #this loop will simulate the school day, in 20 second increments. if the time of the day is equal to their arrival time, it will run the function to see the slides
+        #keep in mind that if the arrival time is altered by seconds, this whole thing falls apart because it has to be a multiple of 20 seconds
         for i in range(2046):
             self.temp = self.temp.next
             if t == arrive:
@@ -71,19 +78,13 @@ class Student:
         
         
 def start_program():
-    #try:
-    start = input("Start simulation? Y/N\n")
-    if start == 'Y' or start == 'y' or start == 'yes' or start == 'Yes':
-        s = Student()
-        for i in range(1, 5):
-            s.simulate(i)
-        s.seen_slides = set(s.seen_slides)
-        print(f"{s.name} saw {len(s.seen_slides)} slides")
-    elif start == 'N' or start == 'n' or start == 'no' or start == 'No':
-        return          
-    # except:
-    #     print("Please input valid command")
-    #     start_program()
+    s = Student()
+    for i in range(1, 5):
+        s.simulate(i)
+    s.seen_slides = set(s.seen_slides)
+    print(f"{s.name} saw {len(s.seen_slides)} slides")
+           
+    
 
 sign = Sign()
 start_program()
