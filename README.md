@@ -1,5 +1,5 @@
 # Linear-Data-Structures
-This was a series of assignments for the class python concepts and methodoly, taken in spring 2022. The assignment was as follows:
+This was a series of assignments for the class python concepts and methodoly, taken in spring 2021. The assignment was as follows:
 Part 1
 Write classes for each these including the following methods:
 
