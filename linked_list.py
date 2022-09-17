@@ -1,8 +1,5 @@
 #Josh Follmer
-#linked lsit assignment
-
-#most of this is based (but not directly copied) off of https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/
-
+#linked list assignment
 
 #this is a class for the things that are getting stored in the list
 class Node:
@@ -11,8 +8,6 @@ class Node:
         self.data = data
         #this will be the connection to the next node. it is purposefully left undefined so it can be assinged later, but it needs to exist first
         self.next = None
-
-    
 
 #this is a class for the head node, or the one that will start the list
 class LinkedList:

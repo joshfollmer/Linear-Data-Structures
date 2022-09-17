@@ -1,8 +1,5 @@
 #Josh Follmer
-#linked lsit assignment
-
-#most of this is based (but not directly copied) off of https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/
-
+#linked list assignment
 
 #this is a class for the things that are getting stored in the list
 class Node:
@@ -12,9 +9,6 @@ class Node:
         #this will be the connection to the next node. it is purposefully left undefined so it can be assinged later, but it needs to exist first
         self.next = None
 
-    
-
-#this is a class for the head node, or the one that will start the list
 class CircularLinkedList:
     def __init__(self, node = None):
        #this is for the data that will be stored in the head
@@ -73,8 +67,6 @@ class CircularLinkedList:
         #deletes the old head
         old_head = None
 
-
-    #this is based from https://www.geeksforgeeks.org/remove-last-node-of-the-linked-list/#:~:text=Approach%3A%20To%20delete%20the%20last,pointer%20of%20that%20node%20null.&text=Create%20an%20extra%20space%20secondLast,till%20the%20second%20last%20node.&text=delete%20the%20last%20node%2C%20i.e.,second%20last%20node%20delete(secondLast.
     def pop_right(self):
         #this one is pretty redunant but i should be in the habit of making these
         '''deletes the last element in the list '''
@@ -86,8 +78,7 @@ class CircularLinkedList:
         #removes the connection from the second last to the last
         second_last.next = None
         second_last.next = self.head
-        
-           
+             
     def print_list(self):
         '''Prints the list'''
         if self.is_empty():
@@ -104,7 +95,7 @@ class CircularLinkedList:
             print(temp.data)
         
     def get_len(self):
-        '''Returns the lenth of the list'''
+        '''Returns the length of the list'''
         #same thing as print_list, but adds one to the length each loop and returns the result
         temp = self.head
         length = 0
